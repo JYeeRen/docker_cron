@@ -1,4 +1,5 @@
 #!/bin/bash
+
 time_tag=$(date '+%Y%m%d%H%M')
 curl --header "Content-Type: application/json" \
 --request POST \
@@ -17,11 +18,12 @@ find /var/pgsql-backups -type f -name "pgsql-backup.*.tar.gz" -mtime +7 -exec rm
 echo "${time_tag}:Starting Backup PostgreSQL ..." >> /var/log/cron.log
 
 cur_time=$(date '+%Y%m%d%H%M')
-PGPASSWORD=${DB_PASS} pg_dump -d ${DB_NAME} -h ${DB_HOST} -U ${DB_USER} > "pgsql-backup.$cur_time.dmp"
-tar zcvf "/var/pgsql-backups/pgsql-backup.$cur_time.tar.gz" *.dmp
+PGPASSWORD=${DB_PASS} pg_dump -d ${DB_NAME} -h ${DB_HOST} -U ${DB_USER} > "pgsql-backup.$cur_time.dump"
+tar zcvf "/var/pgsql-backups/pgsql-backup.$cur_time.tar.gz" *.dump
+tar zcvf "/var/fs-backups/fs-back.${cur_time.tar.gz}" fs_data
 
 echo "${time_tag}:Remove temp file ..." >> /var/log/cron.log
-rm -rf pgsql-backup.*.dmp
+rm -rf pgsql-backup.*.dump
 
 echo "${time_tag}:Finish Backup ..." >> /var/log/cron.log
 

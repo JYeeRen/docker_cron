@@ -46,7 +46,7 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ./db_data:/var/lib/postgresql
+      - ../db_data:/var/lib/postgresql
     environment:
       - DB_USER=suncity
       - DB_PASS=wearetheword
@@ -63,7 +63,7 @@ services:
     ports:
       - 5433:5432
     volumes:
-      - ./db_data_bak:/var/lib/postgresql
+      - ../db_data_bak:/var/lib/postgresql
     environment:
       - REPLICATION_MODE=slave
       - REPLICATION_SSLMODE=prefer
@@ -76,11 +76,11 @@ services:
 
   docker-cron:
     build:
-      - context: ./docker_cron
-      - dockerfile: Dockerfile
+      context: ./docker_cron
+      dockerfile: Dockerfile
     container_name: docker-cron
     volumes:
-        - ./cron.log:/var/log/cron.log
+        - ../pgsql-backups:/var/pgsql-backups
     environment:
       - DB_USER=suncity
       - DB_PASS=wearetheword
