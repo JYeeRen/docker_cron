@@ -2,9 +2,7 @@ version: '3.3'
 
 services:
   docker-cron:
-    build:
-      context: ./docker_cron
-      dockerfile: Dockerfile
+    image: jyeeren/docker-cron
     container_name: docker-cron
     volumes:
       - type: bind
