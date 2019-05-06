@@ -1,2 +1,2 @@
-*/1 * * * * /bin/sh /root/scripts/hello_world.sh
+1 */1 * * * /bin/sh /root/scripts/backup.sh
 
