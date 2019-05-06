@@ -19,13 +19,13 @@ services:
     env_file:
       - ./docker_cron.env
     environment:
-      - DB_NUM=01
+      - DB_NUM=02
       - DB_USER=suncity
       - DB_PASS=wearetheword
       - DB_NAME=suncity
-      - DB_HOST=10.10.10.201
+      - DB_HOST=10.10.10.202
       - DB_PORT=5432
-      - FS_DIR_NAME=fs_1
+      - FS_DIR_NAME=fs_2 fs_3
       - FS_PATH=/var/deployer
     networks:
       - suncity
