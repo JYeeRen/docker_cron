@@ -19,6 +19,7 @@ services:
     env_file:
       - ./docker_cron.env
     environment:
+      - DB_NUM=01
       - DB_USER=suncity
       - DB_PASS=wearetheword
       - DB_NAME=suncity
