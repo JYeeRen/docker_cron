@@ -35,8 +35,13 @@ func_pg_dump() {
 
 func_fs_copy() {
     local cur_time=$(date '+%Y%m%d%H%M')
-    tar zcvf "/var/fs-backups/fs-backup.${cur_time}.tar.gz" ${FS_DIR_NAME} || return 1
+    tar zcvf "/var/fs-backups/fs-backup.${cur_time}.tar.gz" -C ${FS_PATH} ${FS_DIR_NAME} || return 1
     return 0
+}
+
+func_df_info() {
+    local df_res="$(df -h | sed -n '2p' | awk {'print $1,$4,$5'}) | sed 's/[ ][ ]*/-/g'"
+    sendDingTalkMsg "$df_res"
 }
 
 func_clean_overdue
@@ -64,8 +69,5 @@ else
     exit 1
 fi
 
-local time_tag=$(date '+%Y%m%d%H%M')
-sendDingTalkMsg "$time_tag:备份完成."
-local df_res=df -h | sed -n '2p' | awk {'print $1,$4,$5'}
-sendDingTalkMsg "$time_tag:$df_res"
-
+sendDingTalkMsg "备份完成."
+func_df_info
