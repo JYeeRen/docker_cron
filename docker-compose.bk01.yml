@@ -1,0 +1,34 @@
+version: '3.3'
+
+services:
+  docker-cron:
+    build:
+      context: ./docker_cron
+      dockerfile: Dockerfile
+    container_name: docker-cron
+    volumes:
+      - type: bind
+        source: ../pgsql-backups
+        target: /var/pgsql-backups
+      - type: bind
+        source: ../fs-backups
+        target: /var/fs-backups
+      - type: bind
+        source: ../suncity-hrm-deployer/deploy_suncity
+        target: /var/deployer
+    env_file:
+      - ./docker_cron.env
+    environment:
+      - DB_NUM=01
+      - DB_USER=suncity
+      - DB_PASS=wearetheword
+      - DB_NAME=suncity
+      - DB_HOST=10.10.10.201
+      - DB_PORT=5432
+      - FS_DIR_NAME=fs_1
+      - FS_PATH=/var/deployer
+    networks:
+      - suncity
+
+networks:
+  suncity:
