@@ -1,8 +1,10 @@
+#!/bin/bash
+
 sendDingTalkMsg() {
     local time_tag=$(date '+%Y%m%d%H%M')
     curl --header "Content-Type: application/json" \
     --request POST \
-    --data '{"msgtype": "text", "text": {"content": "DB-'$DB_NUM' '$DB_NUM $time_tag':'$*'"}, "at": {"isAtAll": false}}' \
+    --data '{"msgtype": "text", "text": {"content": "DB-'$DB_NUM'-'$time_tag':'$*'"}, "at": {"isAtAll": false}}' \
     https://oapi.dingtalk.com/robot/send?access_token=2b8cc74f742358bc3c220fd2f20507ac3315c42065b19b310fa093982c42739a
 
     return 0
@@ -12,7 +14,7 @@ sendErrorDingTalkMsg() {
     local time_tag=$(date '+%Y%m%d%H%M')
     curl --header "Content-Type: application/json" \
     --request POST \
-    --data '{"msgtype": "text", "text": {"content": "DB-'$DB_NUM' '$time_tag':'$*'"}, "at": {"isAtAll": true}}' \
+    --data '{"msgtype": "text", "text": {"content": "DB-'$DB_NUM'-'$time_tag':'$*'"}, "at": {"isAtAll": true}}' \
     https://oapi.dingtalk.com/robot/send?access_token=2b8cc74f742358bc3c220fd2f20507ac3315c42065b19b310fa093982c42739a
 
     return 0
@@ -69,5 +71,5 @@ else
     exit 1
 fi
 
-sendDingTalkMsg "DB-'$DB_NUM' 备份完成."
+sendDingTalkMsg "备份完成."
 func_df_info
