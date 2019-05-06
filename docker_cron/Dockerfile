@@ -2,8 +2,10 @@ FROM sameersbn/postgresql:9.6-2
 
 # Install cron
 RUN apt-get update -y && apt-get -y install cron curl && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 # Mod tz
-RUN export  TZ='Asia/Shanghai'
+RUN sudo echo "Asia/Shanghai" > /etc/timezone
+RUN sudo dpkg-reconfigure -f noninteractive tzdata
 
 # Add crontab file in the cron directory
 ADD crontab /tmp/crontab
