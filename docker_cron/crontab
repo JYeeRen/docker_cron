@@ -1,2 +1,2 @@
 # */5 * * * * . $HOME/.profile; /bin/sh /root/scripts/backup.sh >> /var/log/cron.log
-*/1 * * * * /bin/sh /root/scripts/backup.sh >> /var/log/cron.log
+1 */1 * * * /bin/sh /root/scripts/backup.sh >> /var/log/cron.log
