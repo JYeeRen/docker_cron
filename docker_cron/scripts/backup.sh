@@ -1,7 +1,5 @@
 #!/bin/bash
 
-. /tmp/my_env
-
 sendDingTalkMsg() {
     local time_tag=$(date '+%Y%m%d%H%M')
     curl --header "Content-Type: application/json" \
