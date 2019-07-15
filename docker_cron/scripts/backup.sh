@@ -39,7 +39,7 @@ func_pg_dump() {
 
 func_fs_copy() {
     local cur_time=$(date '+%Y%m%d%H%M')
-    tar zcvf "/var/fs-backups/fs-backup.${cur_time}.tar.gz" -C ${FS_PATH} ${FS_DIR_NAME} || return 1
+    find ${FS_PATH} -name ${FS_DIR_NAME} | tar zcvPf "/var/fs-backups/fs-backup.${cur_time}.tar.gz" -T - || return 1
     return 0
 }
 

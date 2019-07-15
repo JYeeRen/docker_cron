@@ -23,7 +23,7 @@ services:
       - DB_NAME=suncity
       - DB_HOST=10.10.10.202
       - DB_PORT=5432
-      - FS_DIR_NAME=fs_2 fs_3
+      - FS_DIR_NAME=fs_*
       - FS_PATH=/var/deployer
     networks:
       - suncity
